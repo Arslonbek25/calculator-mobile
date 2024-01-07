@@ -2,10 +2,12 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, StyleSheet } from "react-native";
 import CalculatorButtons from "./components/screen/CalculatorButtons";
 import Colors from "./constants/Colors";
+import InputArea from "./components/screen/InputArea";
 
 export default function App() {
 	return (
 		<SafeAreaView style={styles.container}>
+			<InputArea />
 			<CalculatorButtons />
 			<StatusBar style="auto" />
 		</SafeAreaView>
