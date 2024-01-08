@@ -1,11 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
 import Colors from "../../constants/Colors";
 
-export default function InputArea() {
+export default function InputArea({ input }) {
 	return (
 		<View style={styles.container}>
-			<Text style={styles.input}>390/4</Text>
+			<Text style={styles.input}>{input}</Text>
 		</View>
 	);
 }

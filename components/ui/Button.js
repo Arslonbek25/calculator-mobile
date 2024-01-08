@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-unused-styles */
-import { Pressable, StyleSheet, Text, View, Dimensions } from "react-native";
+import { Dimensions, Pressable, StyleSheet, Text, View } from "react-native";
 import Colors from "../../constants/Colors";
 
 export default function Button({

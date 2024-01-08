@@ -1,58 +1,155 @@
 import { Entypo, Feather, FontAwesome } from "@expo/vector-icons";
+import { all, create } from "mathjs";
 import { StyleSheet, View } from "react-native";
 import Colors from "../../constants/Colors";
 import Button from "../ui/Button";
 
-export default function CalculatorButtons() {
+export default function CalculatorButtons({ input, setInput }) {
+	const config = {};
+	const math = create(all, config);
+
+	const handleInput = value => {
+		const inputStr = String(input);
+		const symbol = parseInt(value);
+		const lastDigit = parseInt(inputStr[inputStr.length - 1]);
+		const isOper = isNaN(symbol);
+
+		if (!isOper || (isOper && !isNaN(lastDigit))) {
+			if (
+				((inputStr === "0" && value !== "0") || inputStr === "0") &&
+				!isOper
+			) {
+				setInput(value);
+				return;
+			}
+			setInput(prev => prev + value);
+		}
+	};
+
+	function clearInput() {
+		setInput("");
+	}
+
+	function evaluate() {
+		const exp = String(input);
+		if (isNaN(parseInt(exp[exp.length - 1]))) {
+			return;
+		}
+		const result = math.evaluate(exp);
+		setInput(result);
+	}
+
+	function deleteOne() {
+		const exp = String(input);
+		const result = exp.slice(0, -1);
+		setInput(result);
+	}
+
 	return (
 		<View style={styles.container}>
 			<View style={styles.row}>
-				<Button>C</Button>
-				<Button>
+				<Button onPress={clearInput}>C</Button>
+				<Button onPress={handleInput.bind(this, "/")}>
 					<Feather name="divide" size={32} />
 				</Button>
-				<Button>
+				<Button onPress={handleInput.bind(this, "*")}>
 					<FontAwesome name="times" size={32} />
 				</Button>
 				<Button>
-					<Feather name="delete" size={32} />
+					<Feather name="delete" size={32} onPress={deleteOne} />
 				</Button>
 			</View>
 			<View style={styles.row}>
-				<Button color={Colors.secondary500}>7</Button>
-				<Button color={Colors.secondary500}>8</Button>
-				<Button color={Colors.secondary500}>9</Button>
+				<Button
+					color={Colors.secondary500}
+					onPress={handleInput.bind(this, "7")}>
+					7
+				</Button>
+				<Button
+					color={Colors.secondary500}
+					onPress={handleInput.bind(this, "8")}>
+					8
+				</Button>
+				<Button
+					color={Colors.secondary500}
+					onPress={handleInput.bind(this, "9")}>
+					9
+				</Button>
 				<Button>
-					<Feather name="minus" size={32} />
+					<Feather
+						name="minus"
+						size={32}
+						onPress={handleInput.bind(this, "-")}
+					/>
 				</Button>
 			</View>
 			<View style={styles.row}>
-				<Button color={Colors.secondary500}>4</Button>
-				<Button color={Colors.secondary500}>5</Button>
-				<Button color={Colors.secondary500}>6</Button>
+				<Button
+					color={Colors.secondary500}
+					onPress={handleInput.bind(this, "4")}>
+					4
+				</Button>
+				<Button
+					color={Colors.secondary500}
+					onPress={handleInput.bind(this, "5")}>
+					5
+				</Button>
+				<Button
+					color={Colors.secondary500}
+					onPress={handleInput.bind(this, "6")}>
+					6
+				</Button>
 				<Button>
-					<Feather name="plus" size={32} />
+					<Feather
+						name="plus"
+						size={32}
+						onPress={handleInput.bind(this, "+")}
+					/>
 				</Button>
 			</View>
 			<View style={styles.group}>
 				<View>
 					<View style={styles.row}>
-						<Button color={Colors.secondary500}>1</Button>
-						<Button color={Colors.secondary500}>2</Button>
-						<Button color={Colors.secondary500}>3</Button>
+						<Button
+							color={Colors.secondary500}
+							onPress={handleInput.bind(this, "1")}>
+							1
+						</Button>
+						<Button
+							color={Colors.secondary500}
+							onPress={handleInput.bind(this, "2")}>
+							2
+						</Button>
+						<Button
+							color={Colors.secondary500}
+							onPress={handleInput.bind(this, "3")}>
+							3
+						</Button>
 					</View>
 					<View style={styles.row}>
 						<Button color={Colors.secondary500}>
-							<Feather name="percent" size={32} />
+							<Feather
+								name="percent"
+								size={32}
+								onPress={handleInput.bind(this, "%")}
+							/>
 						</Button>
-						<Button color={Colors.secondary500}>0</Button>
+						<Button
+							color={Colors.secondary500}
+							onPress={handleInput.bind(this, "0")}>
+							0
+						</Button>
 						<Button color={Colors.secondary500}>
-							<Entypo name="dot-single" size={32} />
+							<Entypo
+								name="dot-single"
+								size={32}
+								onPress={handleInput.bind(this, ".")}
+							/>
 						</Button>
 					</View>
 				</View>
 				<View>
-					<Button size="double" color={Colors.primary500}>
+					<Button size="double" color={Colors.primary500} onPress={evaluate}>
 						=
 					</Button>
 				</View>
