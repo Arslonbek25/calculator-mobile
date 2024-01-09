@@ -55,8 +55,8 @@ export default function CalculatorButtons({ input, setInput }) {
 				<Button onPress={handleInput.bind(this, "*")}>
 					<FontAwesome name="times" size={32} />
 				</Button>
-				<Button>
-					<Feather name="delete" size={32} onPress={deleteOne} />
+				<Button onPress={deleteOne}>
+					<Feather name="delete" size={32} />
 				</Button>
 			</View>
 			<View style={styles.row}>
@@ -75,12 +75,8 @@ export default function CalculatorButtons({ input, setInput }) {
 					onPress={handleInput.bind(this, "9")}>
 					9
 				</Button>
-				<Button>
-					<Feather
-						name="minus"
-						size={32}
-						onPress={handleInput.bind(this, "-")}
-					/>
+				<Button onPress={handleInput.bind(this, "-")}>
+					<Feather name="minus" size={32} />
 				</Button>
 			</View>
 			<View style={styles.row}>
@@ -99,12 +95,8 @@ export default function CalculatorButtons({ input, setInput }) {
 					onPress={handleInput.bind(this, "6")}>
 					6
 				</Button>
-				<Button>
-					<Feather
-						name="plus"
-						size={32}
-						onPress={handleInput.bind(this, "+")}
-					/>
+				<Button onPress={handleInput.bind(this, "+")}>
+					<Feather name="plus" size={32} />
 				</Button>
 			</View>
 			<View style={styles.group}>
@@ -127,24 +119,20 @@ export default function CalculatorButtons({ input, setInput }) {
 						</Button>
 					</View>
 					<View style={styles.row}>
-						<Button color={Colors.secondary500}>
-							<Feather
-								name="percent"
-								size={32}
-								onPress={handleInput.bind(this, "%")}
-							/>
+						<Button
+							color={Colors.secondary500}
+							onPress={handleInput.bind(this, "%")}>
+							<Feather name="percent" size={32} />
 						</Button>
 						<Button
 							color={Colors.secondary500}
 							onPress={handleInput.bind(this, "0")}>
 							0
 						</Button>
-						<Button color={Colors.secondary500}>
-							<Entypo
-								name="dot-single"
-								size={32}
-								onPress={handleInput.bind(this, ".")}
-							/>
+						<Button
+							color={Colors.secondary500}
+							onPress={handleInput.bind(this, ".")}>
+							<Entypo name="dot-single" size={32} />
 						</Button>
 					</View>
 				</View>
